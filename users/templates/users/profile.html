@@ -1,0 +1,31 @@
+{% extends "base.html" %} {% load crispy_forms_tags %} {% block content %}
+<div class="content-section h-100vh text-center mx-auto">
+    <div class="media mx-auto">
+        <img
+            class="rounded-circle account-img mx-auto"
+            src="{{ user.profile.image.url }}" style="height: 100px; width: 100px;"
+            alt="User Avatar"
+        />
+        <div class="media-body">
+            <h2 class="welcome">{{ user.username|capfirst }}</h2>
+            <p class="welcome">
+                Email: {{ user.profile.email|default:"Email not provided" }}
+            </p>
+            <p class="welcome">
+                Phone: {{ user.profile.phone|default:"Not provided" }}
+            </p>
+        </div>
+    </div>
+</div>
+<form method="POST" class="w-50 mx-auto" enctype="multipart/form-data">
+    {% csrf_token %}
+    <fieldset class="form-group">
+        <legend class="border-bottom mb-4">Profile Info</legend>
+        {{ u_form|crispy }} {{ p_form|crispy }}
+    </fieldset>
+    <div class="form-group">
+        <button class="btn btn-outline-info" type="submit">Update</button>
+    </div>
+</form>
+</div>
+{% endblock content %}

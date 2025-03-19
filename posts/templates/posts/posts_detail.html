@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+  <!-- Post Title -->
+  <h1 class="text-center fw-bold text-light display-5">{{ post.title|safe }}</h1>
+  <h4 class="text-center text-warning">
+    <i class="bi bi-clock"></i> {{ post.pub_date_pretty }}
+  </h4>
+
+  <!-- Post Image (Fixed Size & Centered) -->
+  <div class="d-flex justify-content-center mt-4">
+    <img
+      src="{{ post.image.url }}"
+      class="img-fluid rounded shadow-lg"
+      style="
+        max-height: 350px;
+        width: auto;
+        object-fit: contain;
+        border-radius: 15px;
+        box-shadow: 0px 5px 20px rgba(255, 255, 255, 0.2);
+        transition: transform 0.3s ease-in-out;
+      "
+      onmouseover="this.style.transform='scale(1.02)'"
+      onmouseout="this.style.transform='scale(1)'"
+      alt="{{ post.title }}"
+    />
+  </div>
+
+  <!-- Post Content -->
+  <div
+    class="text-light p-4 mt-4"
+    style="
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+      border-radius: 10px;
+      box-shadow: 0px 3px 15px rgba(255, 255, 255, 0.1);
+      line-height: 1.7;
+      font-size: 1.1rem;
+    "
+  >
+    <p class="text-light">{{ post.body|safe }}</p>
+  </div>
+
+ <!-- Comments Section -->
+<div class="mt-5 bg-secondary p-3 rounded">
+  <h2 class="text-light bg-secondary p-2">Comments</h2>
+  <div id="disqus_thread" class="p-3 bg-white rounded"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.identifier = "post-{{ post.id }}"; // Unique post identifier
+    };
+
+    (function () {
+      var d = document,
+        s = d.createElement("script");
+      s.src = "//nickscoolblog.disqus.com/embed.js";
+      s.setAttribute("data-timestamp", +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>
+    Please enable JavaScript to view the
+    <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+  </noscript>
+</div>
+
+
+  <!-- Back to Home Button -->
+  <div class="text-center mt-5">
+    <a href="{% url 'home' %}" class="btn btn-outline-warning btn-lg px-5">
+      ← Back to Home
+    </a>
+  </div>
+</div>
+
+{% endblock %}

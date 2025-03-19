@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %} 
+{% block content %}
+
+<div class="container d-flex flex-column justify-content-center align-items-center vh-100">
+    <h2>Interested in Learning More?</h2>
+    <div class="col-lg-6 col-md-8 col-sm-10 card"></div>
+        <div class="card shadow-lg border-0 p-4">
+            <h1 class="text-center">Contact</h1>
+            <p class="text-center">Send us a message!</p>
+            <form method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    {{ form|crispy }}
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container mt-5">
+  {% load static %}
+
+  <!-- Hero Section -->
+     <time class="text-light  text-bold datetime="{{ time }}">Time|Date: {{ time }}</time>
+
+   
+  <div class="text-center">
+    <img
+      src="https://res.cloudinary.com/df6ndrlj2/image/upload/v1739980151/noahide_bbc9bi.jpg"
+      class="img-fluid rounded shadow-lg mb-4"
+      style="
+        max-height: 70%;
+        width: 70%;
+        height: auto;
+        border-radius: 20px;
+        box-shadow: 0px 10px 30px rgba(255, 255, 255, 0.2);
+      "
+      alt="Home Image"
+    />
+  </div>
+  
+
+  <h2 class="text-center fw-bold text-light" style="font-size: 2.5rem;">
+    Latest Posts
+  </h2>
+  <hr class="bg-warning" style="height: 3px; border-radius: 5px;" />
+
+  <div class="row">
+    {% for post in posts.all %}
+    <div class="col-md-6 mb-4">
+      <div
+        class="card h-100 border-0 shadow-lg"
+        style="
+          background: #58748c;
+          backdrop-filter: blur(10px);
+          border-radius: 15px;
+          overflow: hidden;
+          transition: transform 0.3s ease-in-out;
+        "
+        onmouseover="this.style.transform='scale(1.05)'"
+        onmouseout="this.style.transform='scale(1)'"
+      >
+        <a href="{% url 'post_detail' post.id %}" class="text-decoration-none">
+          <img
+            src="{{ post.image.url }}"
+            class="card-img-top img-fluid"
+            style="
+              max-height: 180px;
+              object-fit: cover;
+              border-top-left-radius: 15px;
+              border-top-right-radius: 15px;
+            "
+            alt="{{ post.title|safe }}"
+          />
+          <div class="card-body text-light">
+            <h3 class="card-title fw-bold">{{ post.title|safe }}</h3>
+          
+            <div class="d-flex justify-content-between">
+              <h4 class="card-subtitle mb-2 text-warning">
+                <i class="bi bi-clock"></i> {{ post.pub_date_pretty }}
+              </h4>
+                <h4 class="card-subtitle mb-2 text-warning">
+                <i class="fas fa-user"></i> {{ post.author }}
+                </h4>
+            </div>
+            <p class="card-text" style="opacity: 0.9;">
+              {{ post.summary|safe }}
+            </p>
+            <button class="btn btn-outline-warning w-100 mt-2">
+              Read More →
+            </button>
+          </div>
+        </a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %}

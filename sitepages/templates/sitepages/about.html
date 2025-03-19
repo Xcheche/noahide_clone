@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5 text-light">
+  <!-- Page Title -->
+  <h1 class="text-center fw-bold display-4 text-warning">About</h1>
+  <hr class="mb-4" style="border-top: 2px solid rgba(255, 255, 255, 0.3);" />
+
+  <!-- Profile Section -->
+  <div class="d-flex justify-content-center">
+    <div
+      class="card p-4 text-center"
+      style="
+        max-width: 600px;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 15px;
+        box-shadow: 0px 5px 20px rgba(255, 255, 255, 0.2);
+      "
+    >
+      <div class="text-center">
+        <img
+          src="{% static 'posts/home.jpg' %}"
+          alt="NoahideInsights"
+          class="img-fluid rounded-circle shadow"
+          style="width: 120px; height: 120px; object-fit: cover;"
+        />
+      </div>
+      <h3 class="mt-3 text-warning fw-bold">What is Noahide-wisdom?</h3>
+      <p class="text-light fs-5" style="line-height: 1.8;">
+        <strong>Noahide-wisdom</strong> is a platform dedicated to providing 
+        insightful and educational content about the <span class="text-warning">Noahide laws</span> 
+        and their relevance in today's world.  
+        <br /><br />
+        Our mission is to <span class="text-warning">inspire and educate</span> individuals 
+        about these universal principles, fostering a deeper understanding of their significance 
+        in modern society.
+      </p>
+    </div>
+  </div>
+
+  <!-- Fun Section -->
+  <div class="text-center mt-5">
+    <a href="{% url 'home' %}" class="btn btn-outline-warning btn-lg px-5">
+      ← Back to Home
+    </a>
+  </div>
+</div>
+{% endblock %}
